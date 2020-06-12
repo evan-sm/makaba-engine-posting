@@ -47,7 +47,7 @@ func main() {
 		"task":   strings.NewReader("post"),
 		"board":  strings.NewReader("test"),  // https://2ch.hk/test/
 		"thread": strings.NewReader("28394"), // https://2ch.hk/test/res/28394.html
-		//"name": strings.NewReader("#s:|ZX#`j"), // Tripcode for attention whore
+		//"name": strings.NewReader(""), // Tripcode for attention whore
 		//"email": strings.NewReader(""), // R u fucking kidding me?
 		//"subject": strings.NewReader(""), // Oldfags never use it
 		"comment": strings.NewReader("Пук"), // Post text
