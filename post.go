@@ -14,16 +14,15 @@ import (
 	"strings"
 )
 
-
 func makeClient() (*http.Client, bool) {
 	jar, _ := cookiejar.New(nil)
 	var cookies []*http.Cookie
-    auth := CurrentUsercode.PasscodeAuth()
-    if auth == false {
-        log.Println("Failed to authorize passcode. Skip.")
-    }
+	auth := CurrentUsercode.PasscodeAuth()
+	if auth == false {
+		log.Println("Failed to authorize passcode. Skip.")
+	}
 	cookie := &http.Cookie{
-		Name: "passcode_auth",
+		Name:   "passcode_auth",
 		Value:  CurrentUsercode.Usercode,
 		Path:   "/",
 		Domain: "2ch.hk",
@@ -40,13 +39,13 @@ func makeClient() (*http.Client, bool) {
 
 func main() {
 	client, ok := makeClient()
-    if ok == false {
-        return
-    }
+	if ok == false {
+		return
+	}
 	//prepare the reader instances to encode
 	valuesBase := map[string]io.Reader{
 		"task":   strings.NewReader("post"),
-        "board":  strings.NewReader("test"), // https://2ch.hk/test/
+		"board":  strings.NewReader("test"),  // https://2ch.hk/test/
 		"thread": strings.NewReader("28394"), // https://2ch.hk/test/res/28394.html
 		//"name": strings.NewReader("#s:|ZX#`j"), // Tripcode for attention whore
 		//"email": strings.NewReader(""), // R u fucking kidding me?
@@ -54,7 +53,7 @@ func main() {
 		"comment": strings.NewReader("Пук"), // Post text
 	}
 	valuesFiles := map[string]io.Reader{
-		`files`:  mustOpen("barenzi.jpg"),
+		`files`: mustOpen("barenzi.jpg"),
 		//`files2`: mustOpen("3.jpg"), // lets assume its this file
 	}
 	err := makabaPost(client, postingUrl, valuesBase, valuesFiles)
@@ -121,7 +120,7 @@ func makabaPost(client *http.Client, url string, valuesBase map[string]io.Reader
 	// Высрать в тред
 	res, err := client.Do(req)
 	if err != nil {
-        log.Println("client.Do(req) error:", err)
+		log.Println("client.Do(req) error:", err)
 		return
 	}
 	body, err := ioutil.ReadAll(res.Body)
